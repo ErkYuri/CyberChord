@@ -86,12 +86,12 @@ public class GerenciadorDeRitmo : MonoBehaviour
     // --- NOVA CHECAGEM FÍSICA E VISUAL ---
     void TentarAcertarFisicamente(string nomeDaNotaEsperada)
     {
-        // 1. Pega TODAS as notas na tela
+        // Pega  as notas na tela
         GameObject[] todasAsNotas = GameObject.FindGameObjectsWithTag("Nota");
         GameObject notaAlvo = null;
         float menorDistanciaDaEsfera = 100f;
 
-        // 2. Procura a nota DESSA COR que está mais perto da Esfera Azul (X = 0)
+        // Procura a nota que está mais perto da Esfera Azul (X = 0)
         foreach (GameObject nota in todasAsNotas)
         {
             if (nota.name.Contains(nomeDaNotaEsperada))
@@ -105,7 +105,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
             }
         }
 
-        // 3. A Janela de Acerto Físico (1.2 unidades representa os 0.3 segundos na velocidade 4)
+        // A Janela de Acerto Físico (1.2 unidades representa os 0.3 segundos na velocidade 4)
         if (notaAlvo != null && menorDistanciaDaEsfera <= 1.2f)
         {
             Debug.Log("HIT! Munição " + nomeDaNotaEsperada + " correta na Esfera! Fogo!");
