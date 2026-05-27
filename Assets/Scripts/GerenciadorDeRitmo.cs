@@ -15,10 +15,10 @@ public class GerenciadorDeRitmo : MonoBehaviour
     public GameObject[] moldesRobos; 
     public GameObject[] moldesNotas; 
 
-    public int vidaDoPulse = 5; 
+    public int vidaDaBase = 5; 
     public Slider barraVisual; 
 
-    private float posicaoXPulse = -6f;
+    private float posicaoXBase = -7f;
 
     void Start()
     {
@@ -29,8 +29,8 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
         if (barraVisual != null)
         {
-            barraVisual.maxValue = vidaDoPulse;
-            barraVisual.value = vidaDoPulse;
+            barraVisual.maxValue = vidaDaBase;
+            barraVisual.value = vidaDaBase;
         }
     }
 
@@ -44,7 +44,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
         if (batidaCheiaAtual > batidaCheiaAnterior)
         {
             int sorteio = Random.Range(0, moldesRobos.Length);
-            Instantiate(moldesRobos[sorteio], new Vector3(8f, 0f, 0f), Quaternion.identity);
+            Instantiate(moldesRobos[sorteio], new Vector3(8f, -1f, 0f), Quaternion.identity);
             Instantiate(moldesNotas[sorteio], new Vector3(8f, -3f, 0f), Quaternion.identity);
             batidaCheiaAnterior = batidaCheiaAtual;
         }
@@ -53,7 +53,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
         GameObject[] todosInimigos = GameObject.FindGameObjectsWithTag("Inimigo");
         foreach (GameObject inimigo in todosInimigos)
         {
-            if (inimigo.transform.position.x <= posicaoXPulse)
+            if (inimigo.transform.position.x <= posicaoXBase)
             {
                 Destroy(inimigo);
                 Debug.Log("DANO POR CONTATO! O robô atropelou o Pulse!");
@@ -128,20 +128,20 @@ public class GerenciadorDeRitmo : MonoBehaviour
     }
 
     void TomarDano()
+{
+    vidaDaBase--; // Subtrai a vida da Base agora!
+    if (barraVisual != null) barraVisual.value = vidaDaBase;
+
+    if (vidaDaBase > 0)
     {
-        vidaDoPulse--; 
-        if (barraVisual != null) barraVisual.value = vidaDoPulse;
-        
-        if (vidaDoPulse > 0)
-        {
-            Debug.Log("DANO! Vida restante: " + vidaDoPulse);
-        }
-        else if (vidaDoPulse == 0)
-        {
-            Debug.Log("GAME OVER! DeadBeat vence!");
-            tocadorDeMusica.Stop(); 
-        }
+        Debug.Log("DANO NA BASE! Estrutura danificada. Vida restante: " + vidaDaBase);
     }
+    else if (vidaDaBase == 0)
+    {
+        Debug.Log("GAME OVER! A base foi destruída e a IA DeadBeat venceu!");
+        tocadorDeMusica.Stop(); 
+    }
+}
 
     GameObject ObterMaisProximoDoPulse(string nomeDaTag)
     {
@@ -151,7 +151,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
         foreach(GameObject obj in objetos)
         {
-            float distancia = Mathf.Abs(obj.transform.position.x - posicaoXPulse); 
+            float distancia = Mathf.Abs(obj.transform.position.x - posicaoXBase); 
             if(distancia < menorDistancia)
             {
                 menorDistancia = distancia;
