@@ -23,11 +23,11 @@ Este arquivo serve para acompanhar o progresso técnico da nova abordagem de gam
 ---
 
 ## 🎨 Passo 3: Criação Visual do "Braço da Guitarra" (HUD de 4 Linhas)
-- [] **3.1** Criar um objeto de fundo na parte inferior da tela para delimitar o espaço da Guitarra.
-- [] **3.2** Criar 4 linhas horizontais paralelas dentro desse espaço.
-- [] **3.3** Criar 4 esferas receptoras (alvos de impacto), posicionando uma no final de cada linha.
-- [] **3.4** Modificar a cor de cada esfera alvo para facilitar a identificação visual do jogador.
-- [] **3.5** Adicionar textos ou ícones indicando as teclas correspondentes (**H**, **J**, **K**, **L**) ao lado de cada esfera alvo.
+- [X] **3.1** Criar um objeto de fundo na parte inferior da tela para delimitar o espaço da Guitarra.
+- [X] **3.2** Criar 4 linhas horizontais paralelas dentro desse espaço.
+- [X] **3.3** Criar 4 esferas receptoras (alvos de impacto), posicionando uma no final de cada linha.
+- [X] **3.4** Modificar a cor de cada esfera alvo para facilitar a identificação visual do jogador.
+- [X] **3.5** Adicionar textos ou ícones indicando as teclas correspondentes (**H**, **J**, **K**, **L**) ao lado de cada esfera alvo.
 
 ---
 

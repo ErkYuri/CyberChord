@@ -13,11 +13,12 @@ public class GerenciadorDeRitmo : MonoBehaviour
     private AudioSource tocadorDeMusica; 
 
     public GameObject[] moldesRobos; 
-    public GameObject[] moldesNotas; 
+    public GameObject[] moldesNotas; // ATENÇÃO: Agora devem ser os novos Prefabs de UI!
 
     public int vidaDaBase = 5; 
     public Slider barraVisual; 
 
+    // A borda de colisão da base onde os robôs dão dano
     private float posicaoXBase = -7f;
 
     void Start()
@@ -41,22 +42,49 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
         int batidaCheiaAtual = Mathf.FloorToInt(batidaAtual);
 
+        // --- SISTEMA DE GERAÇÃO (SPAWNER) ---
         if (batidaCheiaAtual > batidaCheiaAnterior)
         {
             int sorteio = Random.Range(0, moldesRobos.Length);
-            Instantiate(moldesRobos[sorteio], new Vector3(8f, -1f, 0f), Quaternion.identity);
-            Instantiate(moldesNotas[sorteio], new Vector3(8f, -3f, 0f), Quaternion.identity);
+            
+            // 1. Cria o robô no cenário 2D marchando em direção à base (Y ajustado para a superfície)
+            Instantiate(moldesRobos[sorteio], new Vector3(8f, -1.3f, 0f), Quaternion.identity);
+
+            // 2. Define a altura (Y) da nota na UI com base nas suas novas coordenadas
+            float alturaDaLinha = 0f;
+            if (sorteio == 0) alturaDaLinha = 290f;       // Linha H
+            else if (sorteio == 1) alturaDaLinha = 210f;  // Linha J
+            else if (sorteio == 2) alturaDaLinha = 130f;  // Linha K
+            else if (sorteio == 3) alturaDaLinha = 50f;   // Linha L
+
+            // 3. Cria a nota visual da Interface
+            GameObject novaNota = Instantiate(moldesNotas[sorteio]);
+            
+            // 4. Encontra o Braço da Guitarra na tela e coloca a nota dentro dele
+            GameObject braco = GameObject.Find("BracoDaGuitarra");
+            if(braco != null)
+            {
+                novaNota.transform.SetParent(braco.transform, false);
+            }
+
+            // 5. Posiciona a nota lá na direita do ecrã (X = 1920) e na altura certa
+            RectTransform rectNota = novaNota.GetComponent<RectTransform>();
+            if(rectNota != null)
+            {
+                rectNota.anchoredPosition = new Vector2(1920f, alturaDaLinha);
+            }
+
             batidaCheiaAnterior = batidaCheiaAtual;
         }
 
-        // --- LÓGICA DE DANO POR CONTATO ---
+        // --- LÓGICA DE DANO POR CONTATO (ROBÔS VS BASE) ---
         GameObject[] todosInimigos = GameObject.FindGameObjectsWithTag("Inimigo");
         foreach (GameObject inimigo in todosInimigos)
         {
             if (inimigo.transform.position.x <= posicaoXBase)
             {
                 Destroy(inimigo);
-                Debug.Log("DANO POR CONTATO! O robô atropelou o Pulse!");
+                Debug.Log("DANO POR CONTATO! O robô atingiu a Base Defensiva!");
                 TomarDano();
             }
         }
@@ -71,86 +99,93 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
         if (totalDeTeclasApertadas > 1)
         {
-            // Punição por esmagar botões: O tiro falha, mas não tira vida.
+            // Punição por esmagar botões
             Debug.Log("TELA TREME! Sobrecarga por apertar múltiplos botões!");
         }
         else if (totalDeTeclasApertadas == 1)
         {
-            if (apertouH) TentarAcertarFisicamente("NotaH");
-            if (apertouJ) TentarAcertarFisicamente("NotaJ");
-            if (apertouK) TentarAcertarFisicamente("NotaK");
-            if (apertouL) TentarAcertarFisicamente("NotaL");
+            // O valor 250f representa a coordenada X dos seus Alvos na tela
+            if (apertouH) TentarAcertarFisicamente("NotaH", 250f);
+            if (apertouJ) TentarAcertarFisicamente("NotaJ", 250f);
+            if (apertouK) TentarAcertarFisicamente("NotaK", 250f);
+            if (apertouL) TentarAcertarFisicamente("NotaL", 250f);
         }
     }
 
-    // --- NOVA CHECAGEM FÍSICA E VISUAL ---
-    void TentarAcertarFisicamente(string nomeDaNotaEsperada)
+    // --- NOVA CHECAGEM FÍSICA E VISUAL NA UI ---
+    void TentarAcertarFisicamente(string nomeDaNotaEsperada, float posicaoXDoAlvo)
     {
-        // 1. Pega TODAS as notas na tela
         GameObject[] todasAsNotas = GameObject.FindGameObjectsWithTag("Nota");
         GameObject notaAlvo = null;
-        float menorDistanciaDaEsfera = 100f;
+        
+        // A distância agora é medida em Pixels
+        float menorDistanciaDoAlvo = 10000f; 
 
-        // 2. Procura a nota DESSA COR que está mais perto da Esfera Azul (X = 0)
+        // Encontra a nota exata que o jogador tentou acertar
         foreach (GameObject nota in todasAsNotas)
         {
             if (nota.name.Contains(nomeDaNotaEsperada))
             {
-                float distancia = Mathf.Abs(nota.transform.position.x - 0f);
-                if (distancia < menorDistanciaDaEsfera)
+                RectTransform rect = nota.GetComponent<RectTransform>();
+                if (rect != null)
                 {
-                    menorDistanciaDaEsfera = distancia;
-                    notaAlvo = nota;
+                    // Compara a posição X da nota com a posição X do alvo (250)
+                    float distancia = Mathf.Abs(rect.anchoredPosition.x - posicaoXDoAlvo);
+                    if (distancia < menorDistanciaDoAlvo)
+                    {
+                        menorDistanciaDoAlvo = distancia;
+                        notaAlvo = nota;
+                    }
                 }
             }
         }
 
-        // 3. A Janela de Acerto Físico (1.2 unidades representa os 0.3 segundos na velocidade 4)
-        if (notaAlvo != null && menorDistanciaDaEsfera <= 1.2f)
+        // Janela de Acerto de 60 pixels (Pode ajustar para mais fácil ou mais difícil depois)
+        if (notaAlvo != null && menorDistanciaDoAlvo <= 60f)
         {
-            Debug.Log("HIT! Munição " + nomeDaNotaEsperada + " correta na Esfera! Fogo!");
+            Debug.Log("HIT! Munição " + nomeDaNotaEsperada + " conectou no tempo perfeito!");
             
-            // Destrói a munição que estava na Esfera
+            // Destrói a nota da interface
             Destroy(notaAlvo); 
 
-            // Destrói o robô mais perto do Pulse
-            GameObject robo = ObterMaisProximoDoPulse("Inimigo");
-            if (robo != null)
+            // Atira o laser da guitarra e destrói a maior ameaça (robô mais perto)
+            GameObject roboAmeaca = ObterMaisProximoDaBase("Inimigo");
+            if (roboAmeaca != null)
             {
-                Destroy(robo);
+                Destroy(roboAmeaca);
             }
         }
         else
         {
-            // A nota apertada não estava dentro da Esfera! 
-            Debug.Log("MISS! TELA TREME! Arma falhou (Apertou fora de hora ou a cor errada).");
+            Debug.Log("MISS! Arma falhou (Fora do ritmo ou tecla errada).");
         }
     }
 
     void TomarDano()
-{
-    vidaDaBase--; // Subtrai a vida da Base agora!
-    if (barraVisual != null) barraVisual.value = vidaDaBase;
-
-    if (vidaDaBase > 0)
     {
-        Debug.Log("DANO NA BASE! Estrutura danificada. Vida restante: " + vidaDaBase);
+        vidaDaBase--; 
+        if (barraVisual != null) barraVisual.value = vidaDaBase;
+        
+        if (vidaDaBase > 0)
+        {
+            Debug.Log("DANO! Vida restante: " + vidaDaBase);
+        }
+        else if (vidaDaBase <= 0)
+        {
+            Debug.Log("GAME OVER! A IA DeadBeat venceu!");
+            tocadorDeMusica.Stop(); 
+        }
     }
-    else if (vidaDaBase == 0)
-    {
-        Debug.Log("GAME OVER! A base foi destruída e a IA DeadBeat venceu!");
-        tocadorDeMusica.Stop(); 
-    }
-}
 
-    GameObject ObterMaisProximoDoPulse(string nomeDaTag)
+    GameObject ObterMaisProximoDaBase(string nomeDaTag)
     {
         GameObject[] objetos = GameObject.FindGameObjectsWithTag(nomeDaTag);
         GameObject objetoMaisProximo = null;
-        float menorDistancia = 100f; 
+        float menorDistancia = 1000f; 
 
         foreach(GameObject obj in objetos)
         {
+            // Mede qual robô está mais perto da Base Defensiva
             float distancia = Mathf.Abs(obj.transform.position.x - posicaoXBase); 
             if(distancia < menorDistancia)
             {
