@@ -18,7 +18,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
     public int vidaDaBase = 5; 
     public Slider barraVisual; 
 
-    private float posicaoXBase = -7f;
+    private float posicaoXBase = -10f;
 
     void Start()
     {

@@ -26,7 +26,7 @@ public class EfeitoPiscarTela : MonoBehaviour
     {
         StopAllCoroutines();
         // Cor Vermelha (R:1.0, G:0.0, B:0.0) com 30% de transparência (0.3f) - mais visível
-        StartCoroutine(PiscarRotina(new Color(1f, 0f, 0f, 0.3f))); 
+        StartCoroutine(PiscarRotina(new Color(1f, 0f, 0f, 0.1f))); 
     }
 
     // A rotina inteligente que aceita a cor que nós mandarmos
