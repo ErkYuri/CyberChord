@@ -90,7 +90,9 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
         if (totalDeTeclasApertadas > 1)
         {
-            Debug.Log("TELA TREME! Sobrecarga por apertar múltiplos botões!");
+            Debug.Log("Sobrecarga! Punindo jogador...");
+            // CHAMA O TREMOR AQUI
+            if(TremorDeCamera.Instancia != null) TremorDeCamera.Instancia.Tremer(); 
         }
         else if (totalDeTeclasApertadas == 1)
         {
@@ -141,12 +143,17 @@ public class GerenciadorDeRitmo : MonoBehaviour
         else
         {
             Debug.Log($"❌ MISS! Fora do ritmo.");
+            // Aciona a estática cinza
+            if(EfeitoPiscarTela.Instancia != null) EfeitoPiscarTela.Instancia.PiscarEstaticaCinza();
         }
     }
 
     void TomarDano()
     {
-        vidaDaBase--; 
+        // Aciona o alerta vermelho forte
+        if(EfeitoPiscarTela.Instancia != null) EfeitoPiscarTela.Instancia.PiscarDanoVermelho();
+
+        vidaDaBase--;
         if (barraVisual != null) barraVisual.value = vidaDaBase;
         
         if (vidaDaBase > 0)
