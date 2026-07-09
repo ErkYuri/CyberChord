@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2273922234085871643}
   m_Layer: 5
   m_Name: NotaK
-  m_TagString: Untagged
+  m_TagString: Nota
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,4 +88,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e637a59cc349264a9f1ec17b40b5cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovimentoNotaUI
-  velocidadePixel: 800
+  velocidadePixel: 500
