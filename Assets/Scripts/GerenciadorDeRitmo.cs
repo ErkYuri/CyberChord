@@ -17,8 +17,14 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
     public int vidaDaBase = 5; 
     public Slider barraVisual; 
-
     private float posicaoXBase = -10f;
+
+    [Header("Efeitos Sonoros e Visuais")]
+    public AudioClip somAcerto;
+    public AudioClip somErro;
+    public AudioClip somDanoBase;
+    [Range(0f, 1f)] public float volumeEfeitos = 0.4f; // 0.4 garante que seja mais baixo que a música
+    public GameObject prefabExplosao; // Onde vai entrar a arte do seu colega
 
     void Start()
     {
@@ -56,16 +62,10 @@ public class GerenciadorDeRitmo : MonoBehaviour
             GameObject novaNota = Instantiate(moldesNotas[sorteio]);
             
             GameObject braco = GameObject.Find("BracoDaGuitarra");
-            if(braco != null)
-            {
-                novaNota.transform.SetParent(braco.transform, false);
-            }
+            if(braco != null) novaNota.transform.SetParent(braco.transform, false);
 
             RectTransform rectNota = novaNota.GetComponent<RectTransform>();
-            if(rectNota != null)
-            {
-                rectNota.anchoredPosition = new Vector2(1920f, alturaDaLinha);
-            }
+            if(rectNota != null) rectNota.anchoredPosition = new Vector2(1920f, alturaDaLinha);
 
             batidaCheiaAnterior = batidaCheiaAtual;
         }
@@ -76,7 +76,6 @@ public class GerenciadorDeRitmo : MonoBehaviour
             if (inimigo.transform.position.x <= posicaoXBase)
             {
                 Destroy(inimigo);
-                Debug.Log("DANO POR CONTATO! O robô atingiu a Base Defensiva!");
                 TomarDano();
             }
         }
@@ -90,13 +89,12 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
         if (totalDeTeclasApertadas > 1)
         {
-            Debug.Log("Sobrecarga! Punindo jogador...");
-            // CHAMA O TREMOR AQUI
-            if(TremorDeCamera.Instancia != null) TremorDeCamera.Instancia.Tremer(); 
+            if(EfeitoPiscarTela.Instancia != null) EfeitoPiscarTela.Instancia.PiscarEstaticaCinza();
+            // Toca som de erro bem baixinho (metade do volume dos efeitos normais)
+            if (somErro != null) tocadorDeMusica.PlayOneShot(somErro, volumeEfeitos * 0.5f);
         }
         else if (totalDeTeclasApertadas == 1)
         {
-            // Removemos a exigência do nome do robô. Apenas a nota e o alvo importam agora!
             if (apertouH) TentarAcertarFisicamente("NotaH", "AlvoH"); 
             if (apertouJ) TentarAcertarFisicamente("NotaJ", "AlvoJ");     
             if (apertouK) TentarAcertarFisicamente("NotaK", "AlvoK");       
@@ -132,42 +130,47 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
         if (notaAlvo != null && menorDistancia <= 70f)
         {
-            Debug.Log($"✅ HIT! A nota {nomeDaNota} gerou energia! Destruindo ameaça mais próxima...");
-            
             Destroy(notaAlvo); 
             
-            // Agora o laser sempre foca no inimigo mais avançado no mapa
+            // Toca o som de Acerto
+            if (somAcerto != null) tocadorDeMusica.PlayOneShot(somAcerto, volumeEfeitos);
+            
             GameObject roboAmeaca = ObterInimigoMaisProximoDaBase();
-            if (roboAmeaca != null) Destroy(roboAmeaca);
+            if (roboAmeaca != null) 
+            {
+                // Cria a explosão EXATAMENTE na posição onde o robô estava
+                if (prefabExplosao != null) 
+                {
+                    Instantiate(prefabExplosao, roboAmeaca.transform.position, Quaternion.identity);
+                }
+                Destroy(roboAmeaca);
+            }
         }
         else
         {
-            Debug.Log($"❌ MISS! Fora do ritmo.");
-            // Aciona a estática cinza
             if(EfeitoPiscarTela.Instancia != null) EfeitoPiscarTela.Instancia.PiscarEstaticaCinza();
+            // Toca som de erro
+            if (somErro != null) tocadorDeMusica.PlayOneShot(somErro, volumeEfeitos * 0.5f);
         }
     }
 
     void TomarDano()
     {
-        // Aciona o alerta vermelho forte
         if(EfeitoPiscarTela.Instancia != null) EfeitoPiscarTela.Instancia.PiscarDanoVermelho();
+        
+        // Toca som de dano na base
+        if (somDanoBase != null) tocadorDeMusica.PlayOneShot(somDanoBase, volumeEfeitos);
 
-        vidaDaBase--;
+        vidaDaBase--; 
         if (barraVisual != null) barraVisual.value = vidaDaBase;
         
-        if (vidaDaBase > 0)
+        if (vidaDaBase <= 0)
         {
-            Debug.Log("DANO! Vida restante: " + vidaDaBase);
-        }
-        else if (vidaDaBase <= 0)
-        {
-            Debug.Log("GAME OVER! A IA DeadBeat venceu!");
+            Debug.Log("GAME OVER!");
             tocadorDeMusica.Stop(); 
         }
     }
 
-    // Função renomeada e simplificada: busca apenas quem está mais perto da base, sem checar nome
     GameObject ObterInimigoMaisProximoDaBase()
     {
         GameObject[] objetos = GameObject.FindGameObjectsWithTag("Inimigo");
