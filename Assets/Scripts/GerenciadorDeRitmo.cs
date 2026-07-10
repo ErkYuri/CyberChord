@@ -20,11 +20,9 @@ public class GerenciadorDeRitmo : MonoBehaviour
     private float posicaoXBase = -10f;
 
     [Header("Efeitos Sonoros e Visuais")]
-    public AudioClip somAcerto;
-    public AudioClip somErro;
-    public AudioClip somDanoBase;
-    [Range(0f, 1f)] public float volumeEfeitos = 0.4f; // 0.4 garante que seja mais baixo que a música
-    public GameObject prefabExplosao; // Onde vai entrar a arte do seu colega
+    public AudioClip somDanoBase; // Mantivemos apenas o som de dano na base
+    [Range(0f, 1f)] public float volumeEfeitos = 0.4f; 
+    public GameObject prefabExplosao; 
 
     void Start()
     {
@@ -90,8 +88,6 @@ public class GerenciadorDeRitmo : MonoBehaviour
         if (totalDeTeclasApertadas > 1)
         {
             if(EfeitoPiscarTela.Instancia != null) EfeitoPiscarTela.Instancia.PiscarEstaticaCinza();
-            // Toca som de erro bem baixinho (metade do volume dos efeitos normais)
-            if (somErro != null) tocadorDeMusica.PlayOneShot(somErro, volumeEfeitos * 0.5f);
         }
         else if (totalDeTeclasApertadas == 1)
         {
@@ -132,16 +128,15 @@ public class GerenciadorDeRitmo : MonoBehaviour
         {
             Destroy(notaAlvo); 
             
-            // Toca o som de Acerto
-            if (somAcerto != null) tocadorDeMusica.PlayOneShot(somAcerto, volumeEfeitos);
-            
             GameObject roboAmeaca = ObterInimigoMaisProximoDaBase();
             if (roboAmeaca != null) 
             {
-                // Cria a explosão EXATAMENTE na posição onde o robô estava
                 if (prefabExplosao != null) 
                 {
-                    Instantiate(prefabExplosao, roboAmeaca.transform.position, Quaternion.identity);
+                    // Faz a explosão nascer
+                    GameObject efeitoExplosao = Instantiate(prefabExplosao, roboAmeaca.transform.position, Quaternion.identity);
+                    // O comando mágico: Destrói a explosão criada após 0.2 segundos
+                    Destroy(efeitoExplosao, 0.2f); 
                 }
                 Destroy(roboAmeaca);
             }
@@ -149,8 +144,6 @@ public class GerenciadorDeRitmo : MonoBehaviour
         else
         {
             if(EfeitoPiscarTela.Instancia != null) EfeitoPiscarTela.Instancia.PiscarEstaticaCinza();
-            // Toca som de erro
-            if (somErro != null) tocadorDeMusica.PlayOneShot(somErro, volumeEfeitos * 0.5f);
         }
     }
 
@@ -158,7 +151,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
     {
         if(EfeitoPiscarTela.Instancia != null) EfeitoPiscarTela.Instancia.PiscarDanoVermelho();
         
-        // Toca som de dano na base
+        // Toca o som de dano
         if (somDanoBase != null) tocadorDeMusica.PlayOneShot(somDanoBase, volumeEfeitos);
 
         vidaDaBase--; 
@@ -166,7 +159,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
         
         if (vidaDaBase <= 0)
         {
-            Debug.Log("GAME OVER!");
+            Debug.Log("GAME OVER! A IA DeadBeat venceu!");
             tocadorDeMusica.Stop(); 
         }
     }
