@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem; 
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement; // Essencial para trocar/reiniciar fases!
+using UnityEngine.SceneManagement;
 
 public class GerenciadorDeRitmo : MonoBehaviour
 {
@@ -17,7 +17,8 @@ public class GerenciadorDeRitmo : MonoBehaviour
     public GameObject[] moldesRobos; 
     public GameObject[] moldesNotas; 
 
-    public int vidaDaBase = 5; 
+    // VIDA MUDADA PARA 10!
+    public int vidaDaBase = 10; 
     public Slider barraVisual; 
     private float posicaoXBase = -10f;
 
@@ -37,11 +38,11 @@ public class GerenciadorDeRitmo : MonoBehaviour
     public GameObject painelFimDeJogo;
     public TMP_Text textoTituloFim;
     public TMP_Text textoScoreFinal;
-    private bool jogoAtivo = true; // Controla se o jogo está rodando
+    private bool jogoAtivo = true; 
 
     void Start()
     {
-        Time.timeScale = 1f; // Garante que o tempo está normal ao iniciar
+        Time.timeScale = 1f; 
         tocadorDeMusica = GetComponent<AudioSource>();
         tempoPorBatida = 60f / bpm;
         tempoInicialDaMusica = (float)AudioSettings.dspTime;
@@ -53,20 +54,17 @@ public class GerenciadorDeRitmo : MonoBehaviour
             barraVisual.value = vidaDaBase;
         }
         
-        if (painelFimDeJogo != null) painelFimDeJogo.SetActive(false); // Esconde a tela no começo
+        if (painelFimDeJogo != null) painelFimDeJogo.SetActive(false); 
         AtualizarTextosUI();
     }
 
     void Update()
     {
-        // Se o jogo acabou, ignora todo o resto do Update!
         if (!jogoAtivo) return; 
 
         posicaoAtualDaMusica = (float)(AudioSettings.dspTime - tempoInicialDaMusica); 
         batidaAtual = posicaoAtualDaMusica / tempoPorBatida; 
 
-        // --- CONDIÇÃO DE VITÓRIA ---
-        // Se a música parou sozinha (não foi pausada) e já passou do começo
         if (!tocadorDeMusica.isPlaying && batidaAtual > 10f && vidaDaBase > 0)
         {
             VencerJogo();
@@ -105,10 +103,23 @@ public class GerenciadorDeRitmo : MonoBehaviour
             }
         }
 
-        bool apertouH = Keyboard.current.hKey.wasPressedThisFrame;
-        bool apertouJ = Keyboard.current.jKey.wasPressedThisFrame;
-        bool apertouK = Keyboard.current.kKey.wasPressedThisFrame;
-        bool apertouL = Keyboard.current.lKey.wasPressedThisFrame;
+        // --- SISTEMA DE CONTROLE (TECLADO + XBOX JUNTOS) ---
+        // buttonEast = B (Vermelho)
+        // buttonWest = X (Azul)
+        // buttonSouth = A (Verde)
+        // buttonNorth = Y (Laranja/Amarelo)
+
+        bool apertouH = (Keyboard.current != null && Keyboard.current.hKey.wasPressedThisFrame) || 
+                        (Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame); 
+
+        bool apertouJ = (Keyboard.current != null && Keyboard.current.jKey.wasPressedThisFrame) || 
+                        (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame); 
+
+        bool apertouK = (Keyboard.current != null && Keyboard.current.kKey.wasPressedThisFrame) || 
+                        (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame); 
+
+        bool apertouL = (Keyboard.current != null && Keyboard.current.lKey.wasPressedThisFrame) || 
+                        (Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame); 
 
         int totalDeTeclasApertadas = (apertouH ? 1 : 0) + (apertouJ ? 1 : 0) + (apertouK ? 1 : 0) + (apertouL ? 1 : 0);
 
@@ -128,7 +139,6 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
     void TentarAcertarFisicamente(string nomeDaNota, string nomeDoAlvo)
     {
-        // ... (código mantido igual)
         GameObject alvo = GameObject.Find(nomeDoAlvo);
         if (alvo == null) return;
         float alvoX = alvo.transform.position.x; 
@@ -184,7 +194,6 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
     GameObject ObterInimigoMaisProximoDaBase()
     {
-        // ... (código mantido igual)
         GameObject[] objetos = GameObject.FindGameObjectsWithTag("Inimigo");
         GameObject objetoMaisProximo = null;
         float menorDistancia = 1000f; 
@@ -196,16 +205,15 @@ public class GerenciadorDeRitmo : MonoBehaviour
         return objetoMaisProximo;
     }
 
-    void RegistrarAcerto() { /*... mantido...*/ comboAtual++; if (comboAtual >= 15) multiplicador = 4; else if (comboAtual >= 10) multiplicador = 3; else if (comboAtual >= 5) multiplicador = 2; else multiplicador = 1; pontuacao += 50 * multiplicador; AtualizarTextosUI(); }
-    void QuebrarCombo() { /*... mantido...*/ comboAtual = 0; multiplicador = 1; AtualizarTextosUI(); }
-    void AtualizarTextosUI() { /*... mantido...*/ if (textoScore != null) textoScore.text = "SCORE: " + pontuacao.ToString("000000"); if (textoCombo != null) { if (comboAtual > 0) textoCombo.text = "COMBO x" + multiplicador; else textoCombo.text = ""; } }
+    void RegistrarAcerto() { comboAtual++; if (comboAtual >= 15) multiplicador = 4; else if (comboAtual >= 10) multiplicador = 3; else if (comboAtual >= 5) multiplicador = 2; else multiplicador = 1; pontuacao += 50 * multiplicador; AtualizarTextosUI(); }
+    void QuebrarCombo() { comboAtual = 0; multiplicador = 1; AtualizarTextosUI(); }
+    void AtualizarTextosUI() { if (textoScore != null) textoScore.text = "SCORE: " + pontuacao.ToString("000000"); if (textoCombo != null) { if (comboAtual > 0) textoCombo.text = "COMBO x" + multiplicador; else textoCombo.text = ""; } }
 
-    // --- SISTEMA DE FIM DE JOGO ---
     void PerderJogo()
     {
         jogoAtivo = false;
         tocadorDeMusica.Stop();
-        Time.timeScale = 0f; // Congela tudo (inimigos, notas)
+        Time.timeScale = 0f; 
         
         if (painelFimDeJogo != null)
         {
@@ -218,7 +226,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
     void VencerJogo()
     {
         jogoAtivo = false;
-        Time.timeScale = 0f; // Congela a tela final
+        Time.timeScale = 0f; 
         
         if (painelFimDeJogo != null)
         {
@@ -228,16 +236,15 @@ public class GerenciadorDeRitmo : MonoBehaviour
         }
     }
 
-    // Funções para os botões chamarem
     public void ReiniciarFase()
     {
-        Time.timeScale = 1f; // Descongela antes de reiniciar
+        Time.timeScale = 1f; 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void VoltarProMenu()
     {
-        Time.timeScale = 1f; // Descongela antes de sair
-        SceneManager.LoadScene("MenuInicial"); // O nome deve ser exatamente o da sua cena do Menu!
+        Time.timeScale = 1f; 
+        SceneManager.LoadScene("MenuInicial"); 
     }
 }
