@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1577722585266305624}
   - component: {fileID: 9115941389600933801}
   - component: {fileID: 8987533839426223581}
+  - component: {fileID: -1122130250701037771}
   m_Layer: 0
   m_Name: RoboKodiak
   m_TagString: Inimigo
@@ -80,9 +81,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1371577204371289660, guid: f88705b0d0f19c540a3c3eb35b0dc321, type: 3}
   m_Color: {r: 0.8862745, g: 0.67058825, b: 0.050980393, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,4 +105,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bce25118a95ff2140ba889b662ee592a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovimentoInimigo
-  velocidade: 4
+  velocidade: 2.5
+--- !u!114 &-1122130250701037771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7296512900393810253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ab13cc936de3c42979d3dd2fa3f7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControleInimigo
+  walk1: {fileID: -1371577204371289660, guid: f88705b0d0f19c540a3c3eb35b0dc321, type: 3}
+  walk2: {fileID: -6638994408214800431, guid: 9087d592467c4bc488539aa08d38b5a5, type: 3}
+  hitSprite: {fileID: -2250646624344408845, guid: 70a181bc878015d48a25feae415ea455, type: 3}

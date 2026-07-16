@@ -1,0 +1,624 @@
+fileFormatVersion: 2
+guid: bbf56ffd00f8b9d4cab7f9f4b458a886
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2925921133411644422
+    second: aguia_hit-removebg-preview_0
+  - first:
+      213: 663251848750222495
+    second: aguia_hit-removebg-preview_1
+  - first:
+      213: -2905903243701600951
+    second: aguia_hit-removebg-preview_2
+  - first:
+      213: -2613736121075447977
+    second: aguia_hit-removebg-preview_3
+  - first:
+      213: 8422855035823197960
+    second: aguia_hit-removebg-preview_4
+  - first:
+      213: -4687053688948195974
+    second: aguia_hit-removebg-preview_5
+  - first:
+      213: 7100965810010114384
+    second: aguia_hit-removebg-preview_6
+  - first:
+      213: -990448206959362550
+    second: aguia_hit-removebg-preview_7
+  - first:
+      213: 1451587133832947478
+    second: aguia_hit-removebg-preview_8
+  - first:
+      213: 5797276853200417667
+    second: aguia_hit-removebg-preview_9
+  - first:
+      213: 1171937803258630420
+    second: aguia_hit-removebg-preview_10
+  - first:
+      213: -345599947435092393
+    second: aguia_hit-removebg-preview_11
+  - first:
+      213: 5546814679773251975
+    second: aguia_hit-removebg-preview_12
+  - first:
+      213: 1886101611289004097
+    second: aguia_hit-removebg-preview_13
+  - first:
+      213: 4779296129915021721
+    second: aguia_hit-removebg-preview_14
+  - first:
+      213: -1929577297703185033
+    second: aguia_hit-removebg-preview_15
+  - first:
+      213: -8767783666829318413
+    second: aguia_hit-removebg-preview_16
+  - first:
+      213: -3016863925646370341
+    second: aguia_hit-removebg-preview_17
+  - first:
+      213: 5807299715361553448
+    second: aguia_hit-removebg-preview_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 380
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6043fc5c4c5fa9820800000000000000
+      internalID: 2925921133411644422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 398
+        width: 17
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9cc069da08543900800000000000000
+      internalID: 663251848750222495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 394
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94db28f55682ca7d0800000000000000
+      internalID: -2905903243701600951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 396
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 757c0b698d42abbd0800000000000000
+      internalID: -2613736121075447977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_4
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 392
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80f0ad4670ef3e470800000000000000
+      internalID: 8422855035823197960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_5
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 60
+        width: 420
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7dfe03c08d34feb0800000000000000
+      internalID: -4687053688948195974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_6
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 386
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 059c8db18c2bb8260800000000000000
+      internalID: 7100965810010114384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_7
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 376
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0eb3c77a983142f0800000000000000
+      internalID: -990448206959362550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_8
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 383
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 617e3a0bec2152410800000000000000
+      internalID: 1451587133832947478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_9
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 369
+        width: 26
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 383fa9b2590147050800000000000000
+      internalID: 5797276853200417667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_10
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 336
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 411151e093f834010800000000000000
+      internalID: 1171937803258630420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_11
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 371
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 756dcbacdae243bf0800000000000000
+      internalID: -345599947435092393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_12
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 375
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7898ece109e3afc40800000000000000
+      internalID: 5546814679773251975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_13
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 281
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1484c272c67cc2a10800000000000000
+      internalID: 1886101611289004097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_14
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 999ebf32288735240800000000000000
+      internalID: 4779296129915021721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_15
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7755ebbcba3c835e0800000000000000
+      internalID: -1929577297703185033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_16
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 5
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f6aa2f6533925680800000000000000
+      internalID: -8767783666829318413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_17
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 3
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd958206e32f126d0800000000000000
+      internalID: -3016863925646370341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aguia_hit-removebg-preview_18
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 0
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82c3a5e925ca79050800000000000000
+      internalID: 5807299715361553448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      aguia_hit-removebg-preview_0: 2925921133411644422
+      aguia_hit-removebg-preview_1: 663251848750222495
+      aguia_hit-removebg-preview_10: 1171937803258630420
+      aguia_hit-removebg-preview_11: -345599947435092393
+      aguia_hit-removebg-preview_12: 5546814679773251975
+      aguia_hit-removebg-preview_13: 1886101611289004097
+      aguia_hit-removebg-preview_14: 4779296129915021721
+      aguia_hit-removebg-preview_15: -1929577297703185033
+      aguia_hit-removebg-preview_16: -8767783666829318413
+      aguia_hit-removebg-preview_17: -3016863925646370341
+      aguia_hit-removebg-preview_18: 5807299715361553448
+      aguia_hit-removebg-preview_2: -2905903243701600951
+      aguia_hit-removebg-preview_3: -2613736121075447977
+      aguia_hit-removebg-preview_4: 8422855035823197960
+      aguia_hit-removebg-preview_5: -4687053688948195974
+      aguia_hit-removebg-preview_6: 7100965810010114384
+      aguia_hit-removebg-preview_7: -990448206959362550
+      aguia_hit-removebg-preview_8: 1451587133832947478
+      aguia_hit-removebg-preview_9: 5797276853200417667
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

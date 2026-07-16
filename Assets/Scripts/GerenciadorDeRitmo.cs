@@ -82,15 +82,33 @@ public class GerenciadorDeRitmo : MonoBehaviour
         if (batidaCheiaAtual > batidaCheiaAnterior)
         {
             int sorteio = Random.Range(0, moldesRobos.Length);
-            Instantiate(moldesRobos[sorteio], new Vector3(8f, -1.3f, 0f), Quaternion.identity);
 
-            
+            // 1. Preparamos a altura da nota e a altura do robô
             float alturaDaLinha = 0f;
-            if (sorteio == 0) alturaDaLinha = 110f;       // Linha H (Vermelha)
-            else if (sorteio == 1) alturaDaLinha = 40f;   // Linha J (Azul)
-            else if (sorteio == 2) alturaDaLinha = -30f;  // Linha K (Verde)
-            else if (sorteio == 3) alturaDaLinha = -100f; // Linha L (Amarela)
+            float alturaDoRobo = -1.3f; // Altura padrão para o Lobo, Gorila e Cobra (no chão)
 
+            if (sorteio == 0) 
+            {
+                alturaDaLinha = 110f; // Linha H (Vermelha)
+                alturaDoRobo = 3.5f;  // Águia voando lá no alto! (Aumente ou diminua se precisar)
+            }
+            else if (sorteio == 1) 
+            {
+                alturaDaLinha = 40f;  // Linha J (Azul)
+            }
+            else if (sorteio == 2) 
+            {
+                alturaDaLinha = -30f; // Linha K (Verde)
+            }
+            else if (sorteio == 3) 
+            {
+                alturaDaLinha = -100f; // Linha L (Amarela)
+            }
+
+            // 2. Agora o robô nasce usando a 'alturaDoRobo' que configuramos acima
+            Instantiate(moldesRobos[sorteio], new Vector3(8f, alturaDoRobo, 0f), Quaternion.identity);
+
+            // 3. A nota nasce normalmente
             GameObject novaNota = Instantiate(moldesNotas[sorteio]);
             GameObject braco = GameObject.Find("BracoDaGuitarra");
             if(braco != null) novaNota.transform.SetParent(braco.transform, false);
@@ -100,13 +118,16 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
             batidaCheiaAnterior = batidaCheiaAtual;
         }
-
+        
         GameObject[] todosInimigos = GameObject.FindGameObjectsWithTag("Inimigo");
         foreach (GameObject inimigo in todosInimigos)
         {
             if (inimigo.transform.position.x <= posicaoXBase)
             {
-                Destroy(inimigo);
+                ControleInimigo scriptInimigo = inimigo.GetComponent<ControleInimigo>();
+                if(scriptInimigo != null) scriptInimigo.ExecutarAtaque();
+                else Destroy(inimigo); // Segurança caso o script não esteja lá
+                
                 TomarDano();
             }
         }
