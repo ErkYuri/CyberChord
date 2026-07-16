@@ -40,6 +40,11 @@ public class GerenciadorDeRitmo : MonoBehaviour
     public TMP_Text textoScoreFinal;
     private bool jogoAtivo = true; 
 
+    [Header("Sprites do Protagonista")]
+    public SpriteRenderer pulseRender; // Arrastaremos o Pulse aqui
+    public Sprite spriteParado;       // Arte dele parado
+    public Sprite[] spritesTocando;   // As 3 artes dele tocando
+
     void Start()
     {
         Time.timeScale = 1f; 
@@ -56,6 +61,8 @@ public class GerenciadorDeRitmo : MonoBehaviour
         
         if (painelFimDeJogo != null) painelFimDeJogo.SetActive(false); 
         AtualizarTextosUI();
+
+        
     }
 
     void Update()
@@ -77,11 +84,12 @@ public class GerenciadorDeRitmo : MonoBehaviour
             int sorteio = Random.Range(0, moldesRobos.Length);
             Instantiate(moldesRobos[sorteio], new Vector3(8f, -1.3f, 0f), Quaternion.identity);
 
+            
             float alturaDaLinha = 0f;
-            if (sorteio == 0) alturaDaLinha = 290f;       
-            else if (sorteio == 1) alturaDaLinha = 210f;  
-            else if (sorteio == 2) alturaDaLinha = 130f;  
-            else if (sorteio == 3) alturaDaLinha = 50f;   
+            if (sorteio == 0) alturaDaLinha = 110f;       // Linha H (Vermelha)
+            else if (sorteio == 1) alturaDaLinha = 40f;   // Linha J (Azul)
+            else if (sorteio == 2) alturaDaLinha = -30f;  // Linha K (Verde)
+            else if (sorteio == 3) alturaDaLinha = -100f; // Linha L (Amarela)
 
             GameObject novaNota = Instantiate(moldesNotas[sorteio]);
             GameObject braco = GameObject.Find("BracoDaGuitarra");
@@ -130,6 +138,12 @@ public class GerenciadorDeRitmo : MonoBehaviour
         }
         else if (totalDeTeclasApertadas == 1)
         {
+            // Escolhe uma das 3 artes de "tocando" aleatoriamente para dar movimento
+            int poseSorteada = Random.Range(0, spritesTocando.Length);
+            pulseRender.sprite = spritesTocando[poseSorteada];
+            
+            
+
             if (apertouH) TentarAcertarFisicamente("NotaH", "AlvoH"); 
             if (apertouJ) TentarAcertarFisicamente("NotaJ", "AlvoJ");     
             if (apertouK) TentarAcertarFisicamente("NotaK", "AlvoK");       
@@ -247,4 +261,11 @@ public class GerenciadorDeRitmo : MonoBehaviour
         Time.timeScale = 1f; 
         SceneManager.LoadScene("MenuInicial"); 
     }
+
+    // void VoltarParaIdle()
+    // {
+    //     pulseRender.sprite = spriteParado;
+    // }
 }
+
+

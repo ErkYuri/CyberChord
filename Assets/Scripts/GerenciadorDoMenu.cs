@@ -1,17 +1,26 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Permite viajar entre fases
+using UnityEngine.SceneManagement;
 
 public class GerenciadorDoMenu : MonoBehaviour
 {
-    public void ClicouEmJogar()
-    {
-        // Carrega a fase exata. O nome deve ser igualzinho ao da sua cena da fase!
-        SceneManager.LoadScene("SampleScene"); 
+    public void ClicouMusica1() 
+    { 
+        SceneManager.LoadScene("FaseMusica1"); 
     }
 
-    public void ClicouEmSair()
-    {
+    public void ClicouMusica2() 
+    { 
+        SceneManager.LoadScene("FaseMusica2"); 
+    }
+
+    public void ClicouMusica3() 
+    { 
+        SceneManager.LoadScene("FaseMusica3"); 
+    }
+
+    public void ClicouEmSair() 
+    { 
         Debug.Log("Fechando o jogo...");
-        Application.Quit(); // Só funciona quando compilar o jogo final!
+        Application.Quit(); 
     }
 }
