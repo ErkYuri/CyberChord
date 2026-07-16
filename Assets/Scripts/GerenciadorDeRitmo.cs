@@ -89,20 +89,20 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
             if (sorteio == 0) 
             {
-                alturaDaLinha = 110f; // Linha H (Vermelha)
-                alturaDoRobo = 3.5f;  // Águia voando lá no alto! (Aumente ou diminua se precisar)
+                alturaDaLinha = 110f; // Linha H (Vermelha) - Lobo fica no chão
             }
             else if (sorteio == 1) 
             {
-                alturaDaLinha = 40f;  // Linha J (Azul)
+                alturaDaLinha = 40f;  // Linha J (Azul) - A Águia é Azul
+                alturaDoRobo = 3.5f;  // Colocamos o voo para ela aqui!
             }
             else if (sorteio == 2) 
             {
-                alturaDaLinha = -30f; // Linha K (Verde)
+                alturaDaLinha = -30f; // Linha K (Verde) - Cobra no chão
             }
             else if (sorteio == 3) 
             {
-                alturaDaLinha = -100f; // Linha L (Amarela)
+                alturaDaLinha = -100f; // Linha L (Amarela) - Gorila no chão
             }
 
             // 2. Agora o robô nasce usando a 'alturaDoRobo' que configuramos acima
@@ -118,12 +118,13 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
             batidaCheiaAnterior = batidaCheiaAtual;
         }
-        
+
         GameObject[] todosInimigos = GameObject.FindGameObjectsWithTag("Inimigo");
         foreach (GameObject inimigo in todosInimigos)
         {
             if (inimigo.transform.position.x <= posicaoXBase)
             {
+                inimigo.tag = "Untagged";
                 ControleInimigo scriptInimigo = inimigo.GetComponent<ControleInimigo>();
                 if(scriptInimigo != null) scriptInimigo.ExecutarAtaque();
                 else Destroy(inimigo); // Segurança caso o script não esteja lá
