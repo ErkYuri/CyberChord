@@ -356,7 +356,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183141632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -416,7 +416,7 @@ Transform:
   m_GameObject: {fileID: 183141632}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.3, y: 0, z: 0}
+  m_LocalPosition: {x: -12.9, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3409,7 +3409,7 @@ Transform:
   m_GameObject: {fileID: 1819893755}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3551,7 +3551,7 @@ MonoBehaviour:
   - {fileID: 7251766239949917382, guid: 5fb1b9386c2e896489df97a78cbeab0f, type: 3}
   - {fileID: 1594700536813605252, guid: 1d0bc3dd0c2f5b94f9fae6dd6b8367c1, type: 3}
   - {fileID: 4871251144233369534, guid: a69cfa9fc2637e84eb8a0179f1abdd3b, type: 3}
-  vidaDaBase: 5
+  vidaDaBase: 7
   barraVisual: {fileID: 634035871}
   somDanoBase: {fileID: 8300000, guid: cb7e50bea99fed04b8e8014ca38761c1, type: 3}
   volumeEfeitos: 0.4
