@@ -3537,7 +3537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5f69267ec50148b45ffbe2c277b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GerenciadorDeRitmo
-  bpm: 138
+  bpm: 115
   tempoPorBatida: 0
   posicaoAtualDaMusica: 0
   batidaAtual: 0
@@ -3580,7 +3580,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: e76b807791fbfae47b39976e213a61ff, type: 3}
+  m_Resource: {fileID: 8300000, guid: 1cecba275f5195447b70319a3c160907, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
