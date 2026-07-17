@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 7296512900393810253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: 0}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 1}
+  m_LocalPosition: {x: 8, y: 1, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bce25118a95ff2140ba889b662ee592a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovimentoInimigo
-  velocidade: 4.5
+  velocidade: 4
 --- !u!114 &-6412415134943277430
 MonoBehaviour:
   m_ObjectHideFlags: 0

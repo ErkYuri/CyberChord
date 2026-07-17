@@ -45,6 +45,10 @@ public class GerenciadorDeRitmo : MonoBehaviour
     public Sprite spriteParado;       // Arte dele parado
     public Sprite[] spritesTocando;   // As 3 artes dele tocando
 
+    [Header("Sistema de Pausa")]
+    public GameObject painelPausa;
+    private bool jogoPausado = false;
+
     void Start()
     {
         Time.timeScale = 1f; 
@@ -67,6 +71,24 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
     void Update()
     {
+        // Detecta se apertou Espaço (Teclado) ou Start (Controle Xbox)
+        bool apertouPausa = (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame) ||
+                            (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
+
+        if (apertouPausa)
+        {
+            AlternarPausa();
+        }
+
+        // Se estiver pausado e apertar ESC (Teclado) ou Select (Controle Xbox), volta pro menu
+        bool apertouVoltar = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame) ||
+                             (Gamepad.current != null && Gamepad.current.selectButton.wasPressedThisFrame);
+
+        if (jogoPausado && apertouVoltar)
+        {
+            VoltarProMenu();
+        }
+
         if (!jogoAtivo) return; 
 
         posicaoAtualDaMusica = (float)(AudioSettings.dspTime - tempoInicialDaMusica); 
@@ -282,6 +304,27 @@ public class GerenciadorDeRitmo : MonoBehaviour
     {
         Time.timeScale = 1f; 
         SceneManager.LoadScene("MenuInicial"); 
+    }
+
+    void AlternarPausa()
+    {
+        // Se o jogo já acabou (ganhou ou perdeu), não deixa pausar
+        if (!jogoAtivo) return; 
+
+        jogoPausado = !jogoPausado; // Inverte o estado
+
+        if (jogoPausado)
+        {
+            Time.timeScale = 0f; // Congela o jogo
+            tocadorDeMusica.Pause(); // Pausa a música
+            if (painelPausa != null) painelPausa.SetActive(true); // Mostra o aviso
+        }
+        else
+        {
+            Time.timeScale = 1f; // Descongela o jogo
+            tocadorDeMusica.UnPause(); // Despausa a música
+            if (painelPausa != null) painelPausa.SetActive(false); // Esconde o aviso
+        }
     }
 
     // void VoltarParaIdle()
