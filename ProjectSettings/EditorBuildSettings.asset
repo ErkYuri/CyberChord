@@ -6,16 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/FaseMusica1.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
     path: Assets/Scenes/MenuInicial.unity
     guid: b0eabafaef44161479afe293a0f86212
   - enabled: 1
+    path: Assets/Scenes/FaseMusica1.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
     path: Assets/Scenes/FaseMusica2.unity
-    guid: b6426ec9a5c3e4e4d8156459bbd4a46f
+    guid: 09a58f0e4f249ee4087f2b0db04f3dbb
   - enabled: 1
     path: Assets/Scenes/FaseMusica3.unity
-    guid: cb3c691ac5428df4da356009cd1bf86a
+    guid: c779846c603f7ad49bd5cee4df861328
+  - enabled: 1
+    path: Assets/Scenes/FaseMusica4.unity
+    guid: c03ca857d658f794dbcea99c3924afc8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
