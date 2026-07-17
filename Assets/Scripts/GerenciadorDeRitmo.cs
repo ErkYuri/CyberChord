@@ -8,7 +8,6 @@ public class GerenciadorDeRitmo : MonoBehaviour
 {
     public float bpm = 118f; 
     public float tempoPorBatida; 
-    private float tempoInicialDaMusica; 
     public float posicaoAtualDaMusica; 
     public float batidaAtual; 
     private int batidaCheiaAnterior = 0;
@@ -42,11 +41,12 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
     [Header("Sprites do Protagonista")]
     public SpriteRenderer pulseRender; // Arrastaremos o Pulse aqui
-    public Sprite spriteParado;       // Arte dele parado
+    public Sprite spriteParado;        // Arte dele parado
     public Sprite[] spritesTocando;   // As 3 artes dele tocando
 
     [Header("Sistema de Pausa")]
     public GameObject painelPausa;
+    public TMP_Text textoPausa;
     private bool jogoPausado = false;
 
     void Start()
@@ -54,7 +54,6 @@ public class GerenciadorDeRitmo : MonoBehaviour
         Time.timeScale = 1f; 
         tocadorDeMusica = GetComponent<AudioSource>();
         tempoPorBatida = 60f / bpm;
-        tempoInicialDaMusica = (float)AudioSettings.dspTime;
         tocadorDeMusica.Play();
 
         if (barraVisual != null)
@@ -65,35 +64,43 @@ public class GerenciadorDeRitmo : MonoBehaviour
         
         if (painelFimDeJogo != null) painelFimDeJogo.SetActive(false); 
         AtualizarTextosUI();
-
-        
     }
 
     void Update()
     {
-        // Detecta se apertou P (Teclado) ou Start (Controle Xbox)
-        bool apertouPausa = (Keyboard.current != null && Keyboard.current.pKey.wasPressedThisFrame) ||
-                            (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
+        // 1. O código verifica separadamente quem apertou o botão
+        bool apertouPausaTeclado = Keyboard.current != null && Keyboard.current.pKey.wasPressedThisFrame;
+        bool apertouPausaControle = Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame;
                             
-        if (apertouPausa)
+        // 2. Enviamos "false" se foi teclado, e "true" se foi controle
+        if (apertouPausaTeclado)
         {
-            AlternarPausa();
+            AlternarPausa(false); 
+        }
+        else if (apertouPausaControle)
+        {
+            AlternarPausa(true);
         }
 
-        // Se estiver pausado e apertar ESC (Teclado) ou Select (Controle Xbox), volta pro menu
-        bool apertouVoltar = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame) ||
-                             (Gamepad.current != null && Gamepad.current.selectButton.wasPressedThisFrame);
+        // 3. A mesma coisa para voltar pro menu
+        bool apertouVoltarTeclado = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
+        bool apertouVoltarControle = Gamepad.current != null && Gamepad.current.selectButton.wasPressedThisFrame;
 
-        if (jogoPausado && apertouVoltar)
+        if (jogoPausado && (apertouVoltarTeclado || apertouVoltarControle))
         {
             VoltarProMenu();
         }
 
-        if (!jogoAtivo) return; 
+        
 
-        posicaoAtualDaMusica = (float)(AudioSettings.dspTime - tempoInicialDaMusica); 
+        // 3. A BARREIRA: Se o jogo já acabou ou está pausado, ignora tudo que está abaixo!
+        if (!jogoAtivo || jogoPausado) return; 
+
+        // 4. Lógica de Ritmo e Batida (Agora usando o tempo interno da música para evitar dessincronização no Pause)
+        posicaoAtualDaMusica = tocadorDeMusica.time; 
         batidaAtual = posicaoAtualDaMusica / tempoPorBatida; 
 
+        // A vitória só é checada se passamos pela barreira de pausa lá em cima
         if (!tocadorDeMusica.isPlaying && batidaAtual > 10f && vidaDaBase > 0)
         {
             VencerJogo();
@@ -105,7 +112,7 @@ public class GerenciadorDeRitmo : MonoBehaviour
         {
             int sorteio = Random.Range(0, moldesRobos.Length);
 
-            // 1. Preparamos a altura da nota e a altura do robô
+            // Preparamos a altura da nota e a altura do robô
             float alturaDaLinha = 0f;
             float alturaDoRobo = -1.3f; // Altura padrão para o Lobo, Gorila e Cobra (no chão)
 
@@ -127,10 +134,10 @@ public class GerenciadorDeRitmo : MonoBehaviour
                 alturaDaLinha = -100f; // Linha L (Amarela) - Gorila no chão
             }
 
-            // 2. Agora o robô nasce usando a 'alturaDoRobo' que configuramos acima
+            // Agora o robô nasce usando a 'alturaDoRobo' que configuramos acima
             Instantiate(moldesRobos[sorteio], new Vector3(8f, alturaDoRobo, 0f), Quaternion.identity);
 
-            // 3. A nota nasce normalmente
+            // A nota nasce normalmente
             GameObject novaNota = Instantiate(moldesNotas[sorteio]);
             GameObject braco = GameObject.Find("BracoDaGuitarra");
             if(braco != null) novaNota.transform.SetParent(braco.transform, false);
@@ -156,11 +163,6 @@ public class GerenciadorDeRitmo : MonoBehaviour
         }
 
         // --- SISTEMA DE CONTROLE (TECLADO + XBOX JUNTOS) ---
-        // buttonEast = B (Vermelho)
-        // buttonWest = X (Azul)
-        // buttonSouth = A (Verde)
-        // buttonNorth = Y (Laranja/Amarelo)
-
         bool apertouH = (Keyboard.current != null && Keyboard.current.hKey.wasPressedThisFrame) || 
                         (Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame); 
 
@@ -182,15 +184,12 @@ public class GerenciadorDeRitmo : MonoBehaviour
         }
         else if (totalDeTeclasApertadas == 1)
         {
-            // Escolhe uma das 3 artes de "tocando" aleatoriamente para dar movimento
             int poseSorteada = Random.Range(0, spritesTocando.Length);
             pulseRender.sprite = spritesTocando[poseSorteada];
             
-            
-
             if (apertouH) TentarAcertarFisicamente("NotaH", "AlvoH"); 
             if (apertouJ) TentarAcertarFisicamente("NotaJ", "AlvoJ");     
-            if (apertouK) TentarAcertarFisicamente("NotaK", "AlvoK");       
+            if (apertouK) TentarAcertarFisicamente("NotaK", "AlvoK");        
             if (apertouL) TentarAcertarFisicamente("NotaL", "AlvoL");     
         }
     }
@@ -306,31 +305,39 @@ public class GerenciadorDeRitmo : MonoBehaviour
         SceneManager.LoadScene("MenuInicial"); 
     }
 
-    void AlternarPausa()
+    // Adicionamos o "bool naManete" aqui dentro dos parênteses
+    void AlternarPausa(bool naManete = false)
     {
-        // Se o jogo já acabou (ganhou ou perdeu), não deixa pausar
         if (!jogoAtivo) return; 
 
-        jogoPausado = !jogoPausado; // Inverte o estado
+        jogoPausado = !jogoPausado; 
 
         if (jogoPausado)
         {
-            Time.timeScale = 0f; // Congela o jogo
-            tocadorDeMusica.Pause(); // Pausa a música
-            if (painelPausa != null) painelPausa.SetActive(true); // Mostra o aviso
+            Time.timeScale = 0f; 
+            tocadorDeMusica.Pause(); 
+
+            // A MÁGICA ACONTECE AQUI:
+            if (textoPausa != null)
+            {
+                if (naManete)
+                {
+                    // \n\n significa "pular duas linhas" no texto!
+                    textoPausa.text = "JOGO PAUSADO\n\nAperte START para continuar ou SELECT para o Menu.";
+                }
+                else
+                {
+                    textoPausa.text = "JOGO PAUSADO\n\nAperte P para continuar ou ESC para o Menu.";
+                }
+            }
+
+            if (painelPausa != null) painelPausa.SetActive(true); 
         }
         else
         {
-            Time.timeScale = 1f; // Descongela o jogo
-            tocadorDeMusica.UnPause(); // Despausa a música
-            if (painelPausa != null) painelPausa.SetActive(false); // Esconde o aviso
+            Time.timeScale = 1f; 
+            tocadorDeMusica.UnPause(); 
+            if (painelPausa != null) painelPausa.SetActive(false); 
         }
     }
-
-    // void VoltarParaIdle()
-    // {
-    //     pulseRender.sprite = spriteParado;
-    // }
 }
-
-

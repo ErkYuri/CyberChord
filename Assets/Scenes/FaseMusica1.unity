@@ -2611,7 +2611,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "JOGO PAUSADO. \n\nAperte ESPA\xC7O para continuar ou ESC para o Menu."
+  m_text: "JOGO PAUSADO. \n\nAperte P para continuar ou ESC para o Menu."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3454,7 +3454,8 @@ MonoBehaviour:
   - {fileID: 2272720293651571059, guid: e34a973e26c664943a61703ddca5c156, type: 3}
   - {fileID: -3709602983298631851, guid: 2b0e93edc9e0b0f4682ac4ce34264476, type: 3}
   - {fileID: -9098572360850836847, guid: c50ce323f18e4b94fb4e32d5a0224288, type: 3}
-  painelPausa: {fileID: 0}
+  painelPausa: {fileID: 1395015435}
+  textoPausa: {fileID: 1515044861}
 --- !u!82 &2081536329
 AudioSource:
   m_ObjectHideFlags: 0
