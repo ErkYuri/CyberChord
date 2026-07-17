@@ -71,10 +71,10 @@ public class GerenciadorDeRitmo : MonoBehaviour
 
     void Update()
     {
-        // Detecta se apertou Espaço (Teclado) ou Start (Controle Xbox)
-        bool apertouPausa = (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame) ||
+        // Detecta se apertou P (Teclado) ou Start (Controle Xbox)
+        bool apertouPausa = (Keyboard.current != null && Keyboard.current.pKey.wasPressedThisFrame) ||
                             (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
-
+                            
         if (apertouPausa)
         {
             AlternarPausa();
