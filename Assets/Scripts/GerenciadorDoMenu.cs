@@ -24,6 +24,12 @@ public class GerenciadorDoMenu : MonoBehaviour
         SceneManager.LoadScene("FaseMusica4");
     }
 
+    public void CarregarFase5()
+    {
+        
+        SceneManager.LoadScene("FaseMusica5");
+    }
+
     public void ClicouEmSair() 
     { 
         Debug.Log("Fechando o jogo...");

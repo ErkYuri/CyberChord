@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FaseMusica4.unity
     guid: c03ca857d658f794dbcea99c3924afc8
+  - enabled: 1
+    path: Assets/Scenes/FaseMusica5.unity
+    guid: 9fc65eeab748eaf459f558572ad99b5d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

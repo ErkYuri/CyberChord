@@ -163,18 +163,21 @@ public class GerenciadorDeRitmo : MonoBehaviour
         }
 
         // --- SISTEMA DE CONTROLE (TECLADO + XBOX JUNTOS) ---
+        // Ordem estilo Guitar Hero: LT (Vermelho) -> LB (Azul) -> RB (Verde) -> RT (Amarelo)
+
+        // --- SISTEMA DE CONTROLE (SUA IDEIA: DIREITA PARA ESQUERDA) ---
         bool apertouH = (Keyboard.current != null && Keyboard.current.hKey.wasPressedThisFrame) || 
-                        (Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame); 
+                        (Gamepad.current != null && Gamepad.current.rightTrigger.wasPressedThisFrame); // Vermelho (RT)
 
         bool apertouJ = (Keyboard.current != null && Keyboard.current.jKey.wasPressedThisFrame) || 
-                        (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame); 
+                        (Gamepad.current != null && Gamepad.current.rightShoulder.wasPressedThisFrame);  // Azul (RB)
 
         bool apertouK = (Keyboard.current != null && Keyboard.current.kKey.wasPressedThisFrame) || 
-                        (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame); 
+                        (Gamepad.current != null && Gamepad.current.leftShoulder.wasPressedThisFrame);   // Verde (LB)
 
         bool apertouL = (Keyboard.current != null && Keyboard.current.lKey.wasPressedThisFrame) || 
-                        (Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame); 
-
+                        (Gamepad.current != null && Gamepad.current.leftTrigger.wasPressedThisFrame);  // Amarelo (LT)
+       
         int totalDeTeclasApertadas = (apertouH ? 1 : 0) + (apertouJ ? 1 : 0) + (apertouK ? 1 : 0) + (apertouL ? 1 : 0);
 
         if (totalDeTeclasApertadas > 1)
