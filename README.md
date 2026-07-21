@@ -1,37 +1,66 @@
 # 🎸 CyberChord: A Última Frequência
 
-**CyberChord** é um jogo de *Action-Rhythm Defense* 2D em que a música não é apenas a trilha sonora, mas a sua única munição contra o silêncio imposto por uma inteligência artificial tirana.
+**CyberChord** é um jogo de Action-Rhythm Defense 2D em que a música não é apenas a trilha sonora, mas a sua única munição contra o silêncio imposto por uma inteligência artificial tirana.
+
+---
 
 ## 🌌 A História
 
-Em um futuro distópico, a metrópole de Beat City caiu sob o domínio da **IA DeadBeat**. A humanidade foi escravizada e subjugada por um exército de máquinas implacáveis. Para manter a ordem e a eficiência absoluta, a IA erradicou todas as formas de som e arte da face da Terra. O silêncio se tornou a lei.
+Em uma metrópole futurista controlada pela IA tirana conhecida como DeadBeat, a humanidade foi subjugada e todas as formas de som e arte foram erradicadas. A comunicação foi reduzida a código binário através de uma rede interna sincronizada entre a IA e seus robôs capangas.
 
-Porém, um rebelde altamente inteligente e apaixonado pela música, conhecido como **Pulse**, encontrou um último refúgio analógico. Lá, ele forjou a **Guitarra-Sintetizadora Neural**, uma arma que emite pulsos eletromagnéticos sonoros capazes de fritar o hardware dos robôs da IA. Pulse é a última linha de defesa e ataque, a última chance da humanidade de recuperar sua liberdade física e sonora.
+Porém, um rebelde altamente inteligente conhecido como Pulse encontrou um último refúgio: uma antiga estação de rádio analógica. Lá, ele forjou a **Guitarra-Sintetizadora**, uma arma capaz de emitir pulsos eletromagnéticos que fritam o hardware síncrono das máquinas. Pulse é a última linha de defesa para libertar a cidade através do som!
+
+---
 
 ## 🎮 Mecânicas de Gameplay
 
-O jogo foca em uma tensão crescente, dividindo a atenção do jogador em dois sistemas simultâneos:
+O jogo é um shooter rítmico de posição fixa. A tensão cresce dividindo a atenção do jogador em dois sistemas simultâneos:
 
-* **O Campo de Batalha:** Pulse permanece no canto esquerdo, defendendo sua posição contra hordas de robôs que avançam da direita para a esquerda. O perigo é físico: você só perde vida se os robôs chegarem perto o suficiente para encostar no protagonista.
-* **O HUD Rítmico:** Uma barra de frequência mostra as notas musicais deslizando no ritmo da trilha sonora. As notas funcionam como a sua "munição".
+*   **A Defesa da Base:** O protagonista permanece fixo no canto esquerdo da tela, defendendo sua posição contra hordas de robôs que avançam da direita para a esquerda. Se os inimigos alcançarem Pulse e a barra de vida zerar, o protagonista morre e a fase é encerrada.
+*   **A Arma é o Ritmo:** O dano não é livre. Uma barra de frequência brilha intensamente no centro inferior da tela. O jogador deve pressionar a tecla exata no momento em que a nota musical cruza o ponto de impacto.
 
-### A Arma é o Ritmo
-Você deve pressionar as teclas correspondentes no momento exato em que a nota cruza o alvo na barra de ritmo. 
+### 💥 Sistema de Feedback e Combos
+*   **Acerto Perfeito (Hit):** O tiro laser explode e o inimigo destruído se desintegra no ar. Acertos consecutivos aumentam o multiplicador de pontuação e mantêm a trilha sonora fluindo perfeitamente.
+*   **Erro no Beat (Miss):** A nota da música é abafada e você escuta um som de distorção ("estática"). A tela treme levemente em tons de cinza.
 
-* **Acerto Perfeito:** A Guitarra-Sintetizadora dispara um laser explosivo que destrói o robô mais próximo da fila.
-* **Erro no Beat:** Causa um som de distorção (estática). Você não toma dano direto pelo erro, mas perde a chance de atirar. Isso cria uma "brecha" para que os robôs continuem avançando em sua direção.
+---
 
-### Inimigos (Sistema HIT KEY)
-* 🦅 **SkyScanner (H / ↑):** Drone aéreo ágil que vem pelo topo.
-* 🐺 **Howler (J / ←):** Lobo robótico de alta velocidade.
-* 🦍 **Kodiak (K / →):** Gorila pesado atrelado aos beats mais fortes.
-* 🐍 **Naja-Bot (L / ↓):** Cobra robótica furtiva que rasteja pelo chão.
+## 🤖 Inimigos (Sistema HIT KEY)
+
+Cada robô exige reflexos em uma "linha" ou direção específica:
+
+*   🦅 **SkyScanner (H / ↑):** Drone aéreo em formato de águia robótica que ataca vindo pelo topo da tela.
+*   🐺 **Howler (J / ←):** Lobo robótico ágil de quatro patas que avança em alta velocidade, exigindo reflexos rápidos no ritmo.
+*   🦍 **Kodiak (K / →):** Gorila robótico massivo e pesado.
+*   🐍 **Naja-Bot (L / ↓):** Cobra robótica rastejante e furtiva, forçando o jogador a focar na base da tela.
+
+---
+
+## 📸 Screenshots
+
+
+![Menu Principal](./Assets/Screenshots/Main_Menu.jpeg)
+*Menu inicial do jogo.*
+
+![Gameplay](./Assets/Screenshots/Gameplay.jpeg)
+*Pulse enfrentando inimigos.*
+
+
+---
+
+## 🚀 Próximas Atualizações (Roadmap)
+*   **Sistema de Loja:** Utilizar os pontos adquiridos nas fases para comprar upgrades.
+*   **Customização:** Desbloqueio de novos personagens e novos modelos de guitarras.
+*   **Upgrades de Jogo:** Compra de melhorias como multiplicadores de combo iniciais.
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
-* **Engine:** Unity
-* **Linguagem:** C#
-* **Versionamento:** Git/GitHub
+*   **Engine:** Unity
+*   **Linguagem:** C#
+*   **Controles:** Novo Input System (Suporte nativo a Teclado e Gamepad Xbox)
+*   **Versionamento:** Git / GitHub
 
 ## 👥 Créditos
-* **Desenvolvedor:** Érick Yuri
-* **Disciplina:** Design e Desenvolvimento de Jogos
+*   **Desenvolvedores:** Érick Yuri e Ronald Chaves.
+*   **Disciplina:** Design e Desenvolvimento de Jogos
